@@ -4,6 +4,7 @@ import com.example.dejamobileapp.model.User;
 
 import java.util.List;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -16,10 +17,10 @@ import static androidx.room.OnConflictStrategy.REPLACE;
 public interface UserDao {
 
     @Query("SELECT * FROM user")
-    List<User> getAllUsers();
+    LiveData<List<User>> getAllUsers();
 
-    @Query("SELECT * FROM user WHERE id IN (:userIds)")
-    List<User> loadAllUsersByIds(int[] userIds);
+    @Query("SELECT * FROM user WHERE id = :id LIMIT 1")
+    User loadUserById(int id);
 
     @Insert(onConflict = REPLACE)
     void insertAllUsers(User... users);
