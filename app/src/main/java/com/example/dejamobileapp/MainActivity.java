@@ -1,9 +1,18 @@
 package com.example.dejamobileapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 
 import android.os.Bundle;
 import android.widget.Toast;
+
+import com.example.dejamobileapp.model.Card;
+import com.example.dejamobileapp.model.User;
+import com.example.dejamobileapp.utils.Gender;
+import com.example.dejamobileapp.viewmodel.CardViewModel;
+import com.example.dejamobileapp.viewmodel.UserViewModel;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toast.makeText(getApplicationContext(), "Test", Toast.LENGTH_SHORT).show();
+        UserViewModel userViewModel = new UserViewModel(getApplication());
+
     }
 }

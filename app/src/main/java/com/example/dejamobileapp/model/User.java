@@ -1,11 +1,14 @@
 package com.example.dejamobileapp.model;
 
+import com.example.dejamobileapp.converter.GenderConverter;
 import com.example.dejamobileapp.utils.Gender;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 @Entity(tableName = "user")
 public class User {
@@ -23,12 +26,14 @@ public class User {
     private String email;
 
     @ColumnInfo(name = "gender")
+    @TypeConverters(GenderConverter.class)
     private Gender gender;
 
     @ColumnInfo(name = "sync")
     private boolean sync;
 
-    public User(@NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull Gender gender) {
+    public User(int userId, @NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull Gender gender, boolean sync) {
+        this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

@@ -1,5 +1,6 @@
 package com.example.dejamobileapp.model;
 
+import com.example.dejamobileapp.converter.CardSchemeConverter;
 import com.example.dejamobileapp.utils.CardScheme;
 
 import androidx.annotation.NonNull;
@@ -7,6 +8,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 @Entity(foreignKeys = @ForeignKey(entity = User.class,
             parentColumns = "id",
@@ -26,15 +28,17 @@ public class Card {
     private int crypto;
 
     @ColumnInfo(name = "scheme")
+    @TypeConverters(CardSchemeConverter.class)
     private CardScheme scheme;
 
-    @ColumnInfo(name = "user_id")
+    @ColumnInfo(name = "user_id", index = true)
     private int userId;
 
     @ColumnInfo(name = "sync")
     private boolean sync;
 
-    public Card(@NonNull long numbers, @NonNull int crypto, @NonNull CardScheme scheme, @NonNull int userId) {
+    public Card(int cardId, @NonNull long numbers, @NonNull int crypto, @NonNull CardScheme scheme, @NonNull int userId, boolean sync) {
+        this.cardId = cardId;
         this.numbers = numbers;
         this.crypto = crypto;
         this.scheme = scheme;

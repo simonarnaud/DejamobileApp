@@ -35,4 +35,7 @@ public interface CardDao {
 
     @Update(onConflict = REPLACE)
     void updateCard(Card card);
+
+    @Insert(onConflict = REPLACE)
+    long insert(Card card);
 }
