@@ -4,7 +4,6 @@ import com.example.dejamobileapp.converter.GenderConverter;
 import com.example.dejamobileapp.utils.Gender;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

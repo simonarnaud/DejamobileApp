@@ -22,7 +22,7 @@ public interface CardDao {
     Card loadCardById(int id);
 
     @Query("SELECT * FROM card WHERE user_id = :userId")
-    LiveData<List<Card>> loadAllCardsByUserId(int userId);
+    List<Card> loadAllCardsByUserId(int userId);
 
     @Insert(onConflict = REPLACE)
     void insertAllCards(Card... cards);

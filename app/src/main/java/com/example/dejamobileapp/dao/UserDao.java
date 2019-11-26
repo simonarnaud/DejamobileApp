@@ -39,4 +39,7 @@ public interface UserDao {
 
     @Query("SELECT * FROM user WHERE email = :email AND password = :password LIMIT 1")
     User tryToLogOn(String email, String password);
+
+    @Query("SELECT email FROM user")
+    List<String> getEmails();
 }

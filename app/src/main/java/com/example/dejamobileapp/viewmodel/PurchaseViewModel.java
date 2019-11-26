@@ -28,5 +28,5 @@ public class PurchaseViewModel extends AndroidViewModel {
     public void delete(Purchase purchase) {purchaseRepository.delete(purchase);}
     public void deleteAll() {purchaseRepository.deleteAll();}
     public Purchase getPurchaseById(int id) throws ExecutionException, InterruptedException {return purchaseRepository.getPurchaseById(id);}
-    public LiveData<List<Purchase>> getPurchasesByCardId(int id) throws ExecutionException, InterruptedException {return purchaseRepository.getPurchasesByCardId(id);}
+    public List<Purchase> getPurchasesByCardId(int id) throws ExecutionException, InterruptedException {return purchaseRepository.getPurchasesByCardId(id);}
 }

@@ -50,9 +50,9 @@ public class PurchaseRepository {
         return future.get();
     }
 
-    public LiveData<List<Purchase>> getPurchasesByCardId(int id) throws ExecutionException, InterruptedException {
-        Callable<LiveData<List<Purchase>>> callable = () -> purchaseDao.loadAllPurchasesByCardId(id);
-        Future<LiveData<List<Purchase>>> future = AppDatabase.databaseWriteExecutor.submit(callable);
+    public List<Purchase> getPurchasesByCardId(int id) throws ExecutionException, InterruptedException {
+        Callable<List<Purchase>> callable = () -> purchaseDao.loadAllPurchasesByCardId(id);
+        Future<List<Purchase>> future = AppDatabase.databaseWriteExecutor.submit(callable);
         return future.get();
     }
 }

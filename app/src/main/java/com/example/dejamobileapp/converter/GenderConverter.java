@@ -29,4 +29,13 @@ public class GenderConverter {
                 return 2;
         }
     }
+
+    public static Gender toGender(String gender) {
+        if(gender.toLowerCase().equals("male")) {
+            return Gender.MALE;
+        } else if(gender.toLowerCase().equals("female")) {
+            return Gender.FEMALE;
+        }
+        return Gender.OTHER;
+    }
 }

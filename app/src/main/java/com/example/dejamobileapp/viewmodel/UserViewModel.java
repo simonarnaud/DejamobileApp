@@ -29,4 +29,5 @@ public class UserViewModel extends AndroidViewModel {
     public void update(User user) {userRepository.update(user);}
     public User getUserById(int id) throws ExecutionException, InterruptedException {return userRepository.getUserById(id);}
     public User tryToLogOn(String email, String password) throws ExecutionException, InterruptedException {return userRepository.tryToLogOn(email, password);}
+    public List<String> getEmails() throws ExecutionException, InterruptedException {return userRepository.getEmails();}
 }

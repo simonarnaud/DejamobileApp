@@ -59,4 +59,10 @@ public class UserRepository {
         Future<User> future = AppDatabase.databaseWriteExecutor.submit(callable);
         return future.get();
     }
+
+    public List<String> getEmails() throws ExecutionException, InterruptedException {
+        Callable<List<String>> callable = () -> userDao.getEmails();
+        Future<List<String>> future = AppDatabase.databaseWriteExecutor.submit(callable);
+        return future.get();
+    }
 }

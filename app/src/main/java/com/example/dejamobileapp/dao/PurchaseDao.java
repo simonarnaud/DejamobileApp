@@ -35,5 +35,5 @@ public interface PurchaseDao {
     void deleteAllPurchases();
 
     @Query("SELECT * FROM purchase WHERE card_id = :cardId")
-    LiveData<List<Purchase>> loadAllPurchasesByCardId(int cardId);
+    List<Purchase> loadAllPurchasesByCardId(int cardId);
 }

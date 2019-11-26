@@ -30,5 +30,5 @@ public class CardViewModel extends AndroidViewModel {
    public void deleteAll() {cardRepository.deleteAll();}
    public void update(Card card) {cardRepository.update(card);}
    public Card getCardById(int id) throws ExecutionException, InterruptedException {return cardRepository.getCardById(id);}
-   public LiveData<List<Card>> getCardsByUserId(int id) throws ExecutionException, InterruptedException {return cardRepository.getCardsByUserId(id);}
+   public List<Card> getCardsByUserId(int id) throws ExecutionException, InterruptedException {return cardRepository.getCardsByUserId(id);}
  }
