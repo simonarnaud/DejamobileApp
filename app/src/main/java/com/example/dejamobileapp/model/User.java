@@ -32,12 +32,16 @@ public class User {
     @ColumnInfo(name = "sync")
     private boolean sync;
 
-    public User(int userId, @NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull Gender gender, boolean sync) {
+    @ColumnInfo(name = "password")
+    private String password;
+
+    public User(int userId, @NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull Gender gender, @NonNull String password, boolean sync) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.gender = gender;
+        this.password = password;
         this.sync = false;
     }
 
@@ -59,6 +63,10 @@ public class User {
 
     public Gender getGender() {
         return this.gender;
+    }
+
+    public String getPassword() {
+        return this.password;
     }
 
     public boolean getSync() {

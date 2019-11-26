@@ -6,6 +6,7 @@ import com.example.dejamobileapp.model.Card;
 import com.example.dejamobileapp.repository.CardRepository;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -28,6 +29,6 @@ public class CardViewModel extends AndroidViewModel {
    public void delete(Card card) {cardRepository.delete(card);}
    public void deleteAll() {cardRepository.deleteAll();}
    public void update(Card card) {cardRepository.update(card);}
-   public Card getCardById(int id) {return cardRepository.getCardById(id);}
-   public LiveData<List<Card>> getCardsByUserId(int id) {return cardRepository.getCardsByUserId(id);}
+   public Card getCardById(int id) throws ExecutionException, InterruptedException {return cardRepository.getCardById(id);}
+   public LiveData<List<Card>> getCardsByUserId(int id) throws ExecutionException, InterruptedException {return cardRepository.getCardsByUserId(id);}
  }

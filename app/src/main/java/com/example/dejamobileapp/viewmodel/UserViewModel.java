@@ -4,6 +4,8 @@ import android.app.Application;
 import com.example.dejamobileapp.model.User;
 import com.example.dejamobileapp.repository.UserRepository;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -25,5 +27,6 @@ public class UserViewModel extends AndroidViewModel {
     public void delete(User user) {userRepository.delete(user);}
     public void deleteAll() {userRepository.deleteAll();}
     public void update(User user) {userRepository.update(user);}
-    public User getUserById(int id) {return userRepository.getUserById(id);}
+    public User getUserById(int id) throws ExecutionException, InterruptedException {return userRepository.getUserById(id);}
+    public User tryToLogOn(String email, String password) throws ExecutionException, InterruptedException {return userRepository.tryToLogOn(email, password);}
 }

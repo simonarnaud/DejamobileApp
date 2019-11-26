@@ -5,6 +5,7 @@ import com.example.dejamobileapp.model.Purchase;
 import com.example.dejamobileapp.repository.PurchaseRepository;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -26,6 +27,6 @@ public class PurchaseViewModel extends AndroidViewModel {
     public void update(Purchase purchase) {purchaseRepository.update(purchase);}
     public void delete(Purchase purchase) {purchaseRepository.delete(purchase);}
     public void deleteAll() {purchaseRepository.deleteAll();}
-    public Purchase getPurchaseById(int id) {return purchaseRepository.getPurchaseById(id);}
-    public LiveData<List<Purchase>> getPurchasesByCardId(int id) {return purchaseRepository.getPurchasesByCardId(id);}
+    public Purchase getPurchaseById(int id) throws ExecutionException, InterruptedException {return purchaseRepository.getPurchaseById(id);}
+    public LiveData<List<Purchase>> getPurchasesByCardId(int id) throws ExecutionException, InterruptedException {return purchaseRepository.getPurchasesByCardId(id);}
 }

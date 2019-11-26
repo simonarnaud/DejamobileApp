@@ -1,7 +1,6 @@
 package com.example.dejamobileapp.database;
 
 import android.content.Context;
-import android.os.AsyncTask;
 
 import com.example.dejamobileapp.dao.CardDao;
 import com.example.dejamobileapp.dao.PurchaseDao;
@@ -9,16 +8,16 @@ import com.example.dejamobileapp.dao.UserDao;
 import com.example.dejamobileapp.model.Card;
 import com.example.dejamobileapp.model.Purchase;
 import com.example.dejamobileapp.model.User;
-import com.example.dejamobileapp.utils.CardScheme;
 import com.example.dejamobileapp.utils.Gender;
 
-import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 @Database(entities = {User.class, Card.class, Purchase.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
@@ -36,47 +35,38 @@ public abstract class AppDatabase extends RoomDatabase {
         if (INSTANCE == null) {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, DB_NAME).build();
+                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, DB_NAME).addCallback(roomDatabaseCallback).build();
                 }
             }
         }
         return INSTANCE;
     }
 
-    public void clearDb() {
-        if (INSTANCE != null) {
-            new PopulateDb(INSTANCE).execute();
-        }
-    }
 
-
-
-
-
-    //background task to move
-    private static class PopulateDb extends AsyncTask<Void, Void, Void> {
-        private final UserDao userDao;
-        private final CardDao cardDao;
-        private final PurchaseDao purchaseDao;
-
-        public PopulateDb(AppDatabase instance) {
-            userDao = instance.userDao();
-            cardDao = instance.cardDao();
-            purchaseDao = instance.purchaseDao();
-        }
-
+    //Database Populator
+    private static RoomDatabase.Callback roomDatabaseCallback = new RoomDatabase.Callback() {
         @Override
-        protected Void doInBackground(Void... voids) {
-            userDao.deleteAllUsers();
-            cardDao.deleteAllCards();
-            purchaseDao.deleteAllPurchases();
+        public void onOpen(@NonNull SupportSQLiteDatabase db) {
+            super.onOpen(db);
 
-            User user = new User(0,"Simon", "Arnaud", "simn.arnaud@hotmail.fr", Gender.MALE,false);
-            Card card = new Card(0,123456789L, 123, CardScheme.MASTERCARD, (int) userDao.insert(user),false);
-            Purchase purchase = new Purchase(0,(int) cardDao.insert(card), 20, "test", "Banque populaire",new Date(),false);
-            purchaseDao.insertAllPurchases(purchase);
+            databaseWriteExecutor.execute(() -> {
+                UserDao userDao = INSTANCE.userDao();
+                CardDao cardDao = INSTANCE.cardDao();
+                PurchaseDao purchaseDao = INSTANCE.purchaseDao();
 
-            return null;
+                userDao.deleteAllUsers();
+                cardDao.deleteAllCards();
+                purchaseDao.deleteAllPurchases();
+
+                User user = new User(0, "Simon", "Arnaud", "email", Gender.MALE, "password", false);
+                userDao.insert(user);
+
+
+                /* Card card = new Card(0, 123456789, 123, CardScheme.MASTERCARD, user.getUserId(), false);
+                cardDao.insert(card);
+                Purchase purchase = new Purchase(0, card.getCardId(), 20, "test", "impots", new Date(), false);
+                purchaseDao.insertAllPurchases(purchase);*/
+            });
         }
-    }
+    };
 }

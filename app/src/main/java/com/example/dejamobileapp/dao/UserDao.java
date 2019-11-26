@@ -36,4 +36,7 @@ public interface UserDao {
 
     @Update(onConflict = REPLACE)
     void updateUser(User user);
+
+    @Query("SELECT * FROM user WHERE email = :email AND password = :password LIMIT 1")
+    User tryToLogOn(String email, String password);
 }

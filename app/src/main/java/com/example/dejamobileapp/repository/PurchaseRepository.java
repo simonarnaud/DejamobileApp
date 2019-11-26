@@ -7,6 +7,9 @@ import com.example.dejamobileapp.database.AppDatabase;
 import com.example.dejamobileapp.model.Purchase;
 
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -41,11 +44,15 @@ public class PurchaseRepository {
         AppDatabase.databaseWriteExecutor.execute(() -> purchaseDao.deleteAllPurchases());
     }
 
-    public Purchase getPurchaseById(int id) {
-        return purchaseDao.loadPurchaseById(id);
+    public Purchase getPurchaseById(int id) throws ExecutionException, InterruptedException {
+        Callable<Purchase> callable = () -> purchaseDao.loadPurchaseById(id);
+        Future<Purchase> future = AppDatabase.databaseWriteExecutor.submit(callable);
+        return future.get();
     }
 
-    public LiveData<List<Purchase>> getPurchasesByCardId(int id) {
-        return purchaseDao.loadAllPurchasesByCardId(id);
+    public LiveData<List<Purchase>> getPurchasesByCardId(int id) throws ExecutionException, InterruptedException {
+        Callable<LiveData<List<Purchase>>> callable = () -> purchaseDao.loadAllPurchasesByCardId(id);
+        Future<LiveData<List<Purchase>>> future = AppDatabase.databaseWriteExecutor.submit(callable);
+        return future.get();
     }
 }

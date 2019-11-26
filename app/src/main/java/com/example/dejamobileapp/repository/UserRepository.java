@@ -7,6 +7,9 @@ import com.example.dejamobileapp.database.AppDatabase;
 import com.example.dejamobileapp.model.User;
 
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -45,7 +48,15 @@ public class UserRepository {
         AppDatabase.databaseWriteExecutor.execute(() -> userDao.delete(user));
     }
 
-    public User getUserById(int id) {
-        return userDao.loadUserById(id);
+    public User getUserById(int id) throws ExecutionException, InterruptedException {
+        Callable<User> callable = () -> userDao.loadUserById(id);
+        Future<User> future = AppDatabase.databaseWriteExecutor.submit(callable);
+        return future.get();
+    }
+
+    public User tryToLogOn(String email, String password) throws ExecutionException, InterruptedException {
+        Callable<User> callable = () -> userDao.tryToLogOn(email, password);
+        Future<User> future = AppDatabase.databaseWriteExecutor.submit(callable);
+        return future.get();
     }
 }
