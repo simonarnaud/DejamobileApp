@@ -4,11 +4,11 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/edit_user"
+        android:id="@+id/edit_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
-        android:hint="@string/hint_user"
+        android:hint="@string/hint_card"
         android:inputType="textAutoComplete"
         android:padding="@dimen/small_padding"
         android:layout_marginBottom="@dimen/big_padding"

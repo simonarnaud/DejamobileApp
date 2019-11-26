@@ -31,7 +31,7 @@ public class Card {
     @TypeConverters(CardSchemeConverter.class)
     private CardScheme scheme;
 
-    @ColumnInfo(name = "user_id", index = true)
+    @ColumnInfo(name = "user_id")
     private int userId;
 
     @ColumnInfo(name = "sync")

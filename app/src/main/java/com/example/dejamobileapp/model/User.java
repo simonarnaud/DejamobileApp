@@ -3,6 +3,8 @@ package com.example.dejamobileapp.model;
 import com.example.dejamobileapp.converter.GenderConverter;
 import com.example.dejamobileapp.utils.Gender;
 
+import java.io.Serializable;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -10,7 +12,7 @@ import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 @Entity(tableName = "user")
-public class User {
+public class User implements Serializable {
     @PrimaryKey (autoGenerate = true)
     @ColumnInfo (name = "id")
     private int userId;

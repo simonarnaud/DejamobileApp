@@ -1,12 +1,10 @@
 package com.example.dejamobileapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,6 +13,7 @@ import android.widget.Toast;
 import com.example.dejamobileapp.model.User;
 import com.example.dejamobileapp.viewmodel.UserViewModel;
 
+import java.io.Serializable;
 import java.util.concurrent.ExecutionException;
 
 public class LoginActivity extends AppCompatActivity {
@@ -39,16 +38,16 @@ public class LoginActivity extends AppCompatActivity {
             User user = null;
             try {
                 user = userViewModel.tryToLogOn(inputEmail.getText().toString(), inputPassword.getText().toString());
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
+            } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
 
             if (user != null) {
-               Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
+               Intent intent = new Intent(this, CardListActivity.class);
+               intent.putExtra("user", user);
+               startActivity(intent);
            } else {
-               Toast.makeText(this, "Not connected", Toast.LENGTH_SHORT).show();
+               Toast.makeText(this, "Login error", Toast.LENGTH_SHORT).show();
            }
         });
 

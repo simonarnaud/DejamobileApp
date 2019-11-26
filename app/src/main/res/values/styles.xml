@@ -9,7 +9,7 @@
         <item name="colorControlHighlight">@color/button_color</item>
     </style>
 
-    <style name="user_title">
+    <style name="card_title">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_marginBottom">8dp</item>
         <item name="android:paddingLeft">8dp</item>

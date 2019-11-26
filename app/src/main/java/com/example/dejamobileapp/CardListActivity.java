@@ -9,44 +9,48 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.example.dejamobileapp.adapter.UserListAdapter;
+import com.example.dejamobileapp.adapter.CardListAdapter;
+import com.example.dejamobileapp.model.Card;
 import com.example.dejamobileapp.model.User;
-import com.example.dejamobileapp.utils.Gender;
-import com.example.dejamobileapp.viewmodel.UserViewModel;
+import com.example.dejamobileapp.utils.CardScheme;
+import com.example.dejamobileapp.viewmodel.CardViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class MainActivity extends AppCompatActivity {
+public class CardListActivity extends AppCompatActivity {
 
-    private UserViewModel userViewModel;
-    public static final int NEW_USER_REQUEST_CODE = 1;
+    private CardViewModel cardViewModel;
+    public static final int NEW_CARD_REQUEST_CODE = 1;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_card_list);
+
+        user = (User)getIntent().getSerializableExtra("user");
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        final UserListAdapter adapter = new UserListAdapter(this);
+        final CardListAdapter adapter = new CardListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+        cardViewModel = ViewModelProviders.of(this).get(CardViewModel.class);
 
-        userViewModel.getUsers().observe(this, adapter::setUsers);
+        cardViewModel.getCards().observe(this, adapter::setCards);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, NewUserActivity.class);
-            startActivityForResult(intent, NEW_USER_REQUEST_CODE);
+            Intent intent = new Intent(CardListActivity.this, NewCardActivity.class);
+            startActivityForResult(intent, NEW_CARD_REQUEST_CODE);
         });
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == NEW_USER_REQUEST_CODE && resultCode == RESULT_OK) {
-            User user = new User(0, data.getStringExtra(NewUserActivity.EXTRA_REPLY), "Arnaud", "email", Gender.FEMALE, "password",false);
-            userViewModel.insert(user);
+        if (requestCode == NEW_CARD_REQUEST_CODE && resultCode == RESULT_OK) {
+            Card card = new Card(0, 123456789, 123, CardScheme.MASTERCARD, user.getUserId(), false);
+            cardViewModel.insert(card);
         } else {
             Toast.makeText(getApplicationContext(), R.string.empty_not_saved, Toast.LENGTH_SHORT).show();
         }

@@ -23,7 +23,7 @@ public class Purchase {
     @ColumnInfo(name = "id")
     private int purchaseId;
 
-    @ColumnInfo(name = "card_id", index = true)
+    @ColumnInfo(name = "card_id")
     private int card;
 
     @ColumnInfo(name = "amount")

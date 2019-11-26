@@ -10,8 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".SignUpActivity"></activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".NewUserActivity" />
+        <activity android:name=".CardListActivity" />
+        <activity android:name=".NewCardActivity" />
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait">

@@ -9,27 +9,27 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class NewUserActivity extends AppCompatActivity {
+public class NewCardActivity extends AppCompatActivity {
 
-    public static final String EXTRA_REPLY = "com.example.android.userlistsql.REPLY";
+    public static final String EXTRA_REPLY = "com.example.android.cardlistsql.REPLY";
 
-    private EditText editUserView;
+    private EditText editCardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_user);
+        setContentView(R.layout.activity_new_card);
 
-        editUserView = findViewById(R.id.edit_user);
+        editCardView = findViewById(R.id.edit_card);
         final Button button = findViewById(R.id.button_save);
 
         button.setOnClickListener(view -> {
             Intent replyIntent = new Intent();
-            if (TextUtils.isEmpty(editUserView.getText())) {
+            if (TextUtils.isEmpty(editCardView.getText())) {
                 setResult(RESULT_CANCELED, replyIntent);
             } else {
-                String user = editUserView.getText().toString();
-                replyIntent.putExtra(EXTRA_REPLY, user);
+                String card = editCardView.getText().toString();
+                replyIntent.putExtra(EXTRA_REPLY, card);
                 setResult(RESULT_OK, replyIntent);
             }
             finish();
