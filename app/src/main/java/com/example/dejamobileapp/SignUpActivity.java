@@ -1,11 +1,9 @@
 package com.example.dejamobileapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,7 +16,6 @@ import com.example.dejamobileapp.utils.Gender;
 import com.example.dejamobileapp.viewmodel.UserViewModel;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 public class SignUpActivity extends AppCompatActivity {

@@ -1,7 +1,11 @@
 package com.example.dejamobileapp.model;
 
 import com.example.dejamobileapp.converter.CardSchemeConverter;
+import com.example.dejamobileapp.converter.DateConverter;
 import com.example.dejamobileapp.utils.CardScheme;
+
+import java.io.Serializable;
+import java.util.Date;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
@@ -16,7 +20,7 @@ import androidx.room.TypeConverters;
             onDelete = ForeignKey.CASCADE
             ),
         tableName = "card")
-public class Card {
+public class Card implements Serializable {
     @PrimaryKey (autoGenerate = true)
     @ColumnInfo(name = "id")
     private int cardId;
@@ -26,6 +30,10 @@ public class Card {
 
     @ColumnInfo(name = "crypto")
     private int crypto;
+
+    @ColumnInfo(name = "expiration")
+    @TypeConverters(DateConverter.class)
+    private Date expiration;
 
     @ColumnInfo(name = "scheme")
     @TypeConverters(CardSchemeConverter.class)
@@ -37,10 +45,11 @@ public class Card {
     @ColumnInfo(name = "sync")
     private boolean sync;
 
-    public Card(int cardId, @NonNull long numbers, @NonNull int crypto, @NonNull CardScheme scheme, @NonNull int userId, boolean sync) {
+    public Card(int cardId, long numbers, int crypto, @NonNull Date expiration, @NonNull CardScheme scheme, int userId, boolean sync) {
         this.cardId = cardId;
         this.numbers = numbers;
         this.crypto = crypto;
+        this.expiration = expiration;
         this.scheme = scheme;
         this.userId = userId;
         this.sync = false;
@@ -57,6 +66,8 @@ public class Card {
     public int getCrypto() {
         return this.crypto;
     }
+
+    public Date getExpiration() { return this.expiration; }
 
     public CardScheme getScheme() {
         return this.scheme;

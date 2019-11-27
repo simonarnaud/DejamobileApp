@@ -42,7 +42,7 @@ public class Purchase {
     @ColumnInfo(name = "sync")
     private boolean sync;
 
-    public Purchase(int purchaseId, @NonNull int card, @NonNull int amount, String description, @NonNull String destination, Date date, boolean sync) {
+    public Purchase(int purchaseId, int card, int amount, String description, @NonNull String destination, Date date, boolean sync) {
         this.purchaseId = purchaseId;
         this.card = card;
         this.amount = amount;

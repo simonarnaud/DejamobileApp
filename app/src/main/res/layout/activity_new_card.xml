@@ -135,7 +135,7 @@
                     android:fontFamily="sans-serif-light"
                     android:hint="@string/hint_card"
                     android:textSize="18sp"
-                    android:inputType="number"
+                    android:inputType="phone"
                     android:textColor="@color/blackTextColor"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -176,7 +176,7 @@
                     android:fontFamily="sans-serif-light"
                     android:hint="@string/hint_expiration"
                     android:textSize="18sp"
-                    android:inputType="number"
+                    android:inputType="phone"
                     android:textColor="@color/blackTextColor"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -204,6 +204,7 @@
                     android:hint="@string/hint_cvv"
                     android:textSize="18sp"
                     android:inputType="number"
+                    android:maxLength="3"
                     android:textColor="@color/blackTextColor"/>
 
             </com.google.android.material.textfield.TextInputLayout>

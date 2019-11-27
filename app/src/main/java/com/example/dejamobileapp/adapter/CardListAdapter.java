@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.example.dejamobileapp.R;
 import com.example.dejamobileapp.model.Card;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,19 +31,20 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
 
     public CardListAdapter(Context context) { inflater = LayoutInflater.from(context); }
 
+    @NotNull
     @Override
-    public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CardViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
         View itemView = inflater.inflate(R.layout.recyclerview_card_item, parent, false);
         return new CardViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(CardViewHolder holder, int position) {
+    public void onBindViewHolder(@NotNull CardViewHolder holder, int position) {
         if (cards != null) {
             Card currentCard = cards.get(position);
             holder.cardItemView.setText(currentCard.getScheme().toString());
         } else {
-            holder.cardItemView.setText("No numbers");
+            holder.cardItemView.setText(R.string.empty_numbers);
         }
     }
 

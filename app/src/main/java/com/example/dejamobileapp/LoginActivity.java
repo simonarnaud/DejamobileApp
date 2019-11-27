@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.example.dejamobileapp.model.User;
 import com.example.dejamobileapp.viewmodel.UserViewModel;
 
-import java.io.Serializable;
 import java.util.concurrent.ExecutionException;
 
 public class LoginActivity extends AppCompatActivity {
@@ -21,6 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText inputEmail, inputPassword;
 
     private UserViewModel userViewModel;
+    public static final String USER_SEND_CODE = "THROW_USER";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
 
             if (user != null) {
                Intent intent = new Intent(this, CardListActivity.class);
-               intent.putExtra("user", user);
+               intent.putExtra(USER_SEND_CODE, user);
                startActivity(intent);
            } else {
                Toast.makeText(this, "Login error", Toast.LENGTH_SHORT).show();

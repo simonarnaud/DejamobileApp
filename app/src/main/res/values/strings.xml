@@ -4,5 +4,6 @@
     <string name="hint_expiration">Expiration date</string>
     <string name="hint_cvv">Cvv</string>
     <string name="button_save">Save card</string>
-    <string name="empty_not_saved">User not saved because it is empty</string>
+    <string name="empty_not_saved">Card not saved because an error occurred</string>
+    <string name="empty_numbers">No numbers…</string>
 </resources>

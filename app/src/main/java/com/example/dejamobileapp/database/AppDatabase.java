@@ -60,12 +60,6 @@ public abstract class AppDatabase extends RoomDatabase {
 
                 User user = new User(0, "Simon", "Arnaud", "email", Gender.MALE, "password", false);
                 userDao.insert(user);
-
-
-                /* Card card = new Card(0, 123456789, 123, CardScheme.MASTERCARD, user.getUserId(), false);
-                cardDao.insert(card);
-                Purchase purchase = new Purchase(0, card.getCardId(), 20, "test", "impots", new Date(), false);
-                purchaseDao.insertAllPurchases(purchase);*/
             });
         }
     };
