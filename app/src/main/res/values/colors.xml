@@ -6,4 +6,5 @@
     <color name="textColor">#d3d3d3</color>
     <color name="button_color">#8C1E1E</color>
     <color name="hint_color">#9E9E9E</color>
+    <color name="blackTextColor">#000000</color>
 </resources>

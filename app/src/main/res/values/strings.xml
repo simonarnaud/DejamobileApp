@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">DejamobileApp</string>
-    <string name="hint_card">Card...</string>
-    <string name="button_save">Save</string>
+    <string name="hint_card">Card number</string>
+    <string name="hint_expiration">Expiration date</string>
+    <string name="hint_cvv">Cvv</string>
+    <string name="button_save">Save card</string>
     <string name="empty_not_saved">User not saved because it is empty</string>
 </resources>
