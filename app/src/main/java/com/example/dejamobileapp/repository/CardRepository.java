@@ -44,6 +44,10 @@ public class CardRepository {
         AppDatabase.databaseWriteExecutor.execute(() -> cardDao.deleteAllCards());
     }
 
+    public void deleteAllUserCards(int userId) {
+        AppDatabase.databaseWriteExecutor.execute(() -> cardDao.deleteAllUserCards(userId));
+    }
+
     public void update(Card card) {
         AppDatabase.databaseWriteExecutor.execute(() -> cardDao.updateCard(card));
     }

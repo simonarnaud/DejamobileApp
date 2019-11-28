@@ -109,6 +109,6 @@ public class CardListActivity extends AppCompatActivity implements RemoveCardLis
 
     @Override
     public void removeAllCards() {
-        cardViewModel.deleteAll();
+        cardViewModel.deleteAllUserCards(user.getUserId());
     }
 }

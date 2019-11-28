@@ -33,6 +33,9 @@ public interface CardDao {
     @Query("DELETE FROM card")
     void deleteAllCards();
 
+    @Query("DELETE FROM card where user_id = :userId")
+    void deleteAllUserCards(int userId);
+
     @Update(onConflict = REPLACE)
     void updateCard(Card card);
 

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -41,15 +45,12 @@
                 android:id="@+id/card_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_marginStart="30dp"
                 android:textColor="@color/textColor"
                 android:textSize="18sp"
+                android:layout_marginEnd="8dp"
                 android:singleLine="true"/>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
 
             <ImageView
                 android:id="@+id/card_scheme"
@@ -63,7 +64,7 @@
 
     <LinearLayout
         style="@style/card_back"
-        android:visibility="visible"
+        android:visibility="gone"
         android:gravity="end"
         android:id="@+id/card_back_linear">
         <TextView
