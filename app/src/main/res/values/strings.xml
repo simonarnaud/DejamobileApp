@@ -10,6 +10,8 @@
     <string name="remove_all_cards">Remove all cards</string>
     <string name="menu_log_out">Log out</string>
     <string name="menu_profile">Profile</string>
+    <string name="menu_purchases">Purchases</string>
+    <string name="menu_cards">Cards</string>
     <string name="fill_field">Fill the field to sign up :</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>

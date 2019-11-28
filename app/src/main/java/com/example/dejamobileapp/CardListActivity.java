@@ -1,5 +1,6 @@
 package com.example.dejamobileapp;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +20,7 @@ import com.example.dejamobileapp.model.Card;
 import com.example.dejamobileapp.model.User;
 import com.example.dejamobileapp.utils.RemoveCardListener;
 import com.example.dejamobileapp.viewmodel.CardViewModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -27,6 +29,8 @@ public class CardListActivity extends AppCompatActivity implements RemoveCardLis
 
     public static final int NEW_CARD_REQUEST_CODE = 1;
     public static final String USER_ID_CODE = "USER_ID_SEND";
+
+    private ActionBar toolbar;
 
     private CardViewModel cardViewModel;
     private User user;
@@ -38,6 +42,11 @@ public class CardListActivity extends AppCompatActivity implements RemoveCardLis
         setContentView(R.layout.activity_card_list);
 
         user = (User)getIntent().getSerializableExtra(LoginActivity.USER_SEND_CODE);
+
+        //
+        toolbar = getSupportActionBar();
+        BottomNavigationView bottomNavigation = findViewById(R.id.navigation_bar);
+        //
 
         emptyCards = findViewById(R.id.empty_cards);
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
@@ -63,7 +72,7 @@ public class CardListActivity extends AppCompatActivity implements RemoveCardLis
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_profil, menu);
+        getMenuInflater().inflate(R.menu.menu_card_list, menu);
         return true;
     }
 
