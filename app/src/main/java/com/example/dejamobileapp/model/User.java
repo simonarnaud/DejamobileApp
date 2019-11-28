@@ -73,4 +73,19 @@ public class User implements Serializable {
     public boolean getSync() {
         return this.sync;
     }
+
+    public String getCardIdentity() {
+        String str = "";
+        if(this.gender == Gender.MALE) {
+            str += "Mr ";
+        } else if (this.gender == Gender.FEMALE) {
+            str += "Mme ";
+        }
+
+        str += (this.firstName.substring(0,1).toUpperCase() + this.firstName.substring(1));
+        str += " ";
+        str += this.lastName.toUpperCase();
+
+        return str;
+    }
 }

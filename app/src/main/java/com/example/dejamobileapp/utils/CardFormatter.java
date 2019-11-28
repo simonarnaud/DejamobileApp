@@ -21,4 +21,9 @@ public class CardFormatter {
             }
         }
     }
+
+    public static String cardNumberFormatter(long numbers) {
+        String chain = String.valueOf(numbers);
+        return chain.substring(0,4) + " " + chain.substring(4,8) + " " + chain.substring(8,12) + " " + chain.substring(12);
+    }
 }

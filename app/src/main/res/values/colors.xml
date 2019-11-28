@@ -8,4 +8,5 @@
     <color name="hint_color">#9E9E9E</color>
     <color name="blackTextColor">#000000</color>
     <color name="error">#da262e</color>
+    <color name="light_blue">#add8e6</color>
 </resources>
