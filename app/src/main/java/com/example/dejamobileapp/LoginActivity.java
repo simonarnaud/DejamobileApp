@@ -35,20 +35,22 @@ public class LoginActivity extends AppCompatActivity {
         userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
 
         loginButton.setOnClickListener(view -> {
-            User user = null;
+            User user;
             try {
                 user = userViewModel.tryToLogOn(inputEmail.getText().toString(), inputPassword.getText().toString());
+                if (user != null) {
+                    inputEmail.getText().clear();
+                    inputPassword.getText().clear();
+                    Intent intent = new Intent(this, CardListActivity.class);
+                    intent.putExtra(USER_SEND_CODE, user);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(this, "Login error", Toast.LENGTH_SHORT).show();
+                }
+
             } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
-
-            if (user != null) {
-               Intent intent = new Intent(this, CardListActivity.class);
-               intent.putExtra(USER_SEND_CODE, user);
-               startActivity(intent);
-           } else {
-               Toast.makeText(this, "Login error", Toast.LENGTH_SHORT).show();
-           }
         });
 
         textSignup.setOnClickListener(view -> {

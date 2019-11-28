@@ -8,4 +8,6 @@
     <string name="empty_numbers">No numbers…</string>
     <string name="remove_card">Remove card</string>
     <string name="remove_all_cards">Remove all cards</string>
+    <string name="menu_log_out">Log out</string>
+    <string name="menu_profile">Profile</string>
 </resources>

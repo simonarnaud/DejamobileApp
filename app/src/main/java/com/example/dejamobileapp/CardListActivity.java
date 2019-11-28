@@ -1,18 +1,20 @@
 package com.example.dejamobileapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.dejamobileapp.adapter.CardListAdapter;
+import com.example.dejamobileapp.factory.CardViewModelFactory;
 import com.example.dejamobileapp.model.Card;
 import com.example.dejamobileapp.model.User;
 import com.example.dejamobileapp.utils.RemoveCardListener;
@@ -43,9 +45,10 @@ public class CardListActivity extends AppCompatActivity implements RemoveCardLis
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        cardViewModel = ViewModelProviders.of(this).get(CardViewModel.class);
+        CardViewModelFactory cardFactory = new CardViewModelFactory(this.getApplication(), user.getUserId());
+        cardViewModel = ViewModelProviders.of(this, cardFactory).get(CardViewModel.class);
 
-        cardViewModel.getCards().observe(this, cards -> {
+        cardViewModel.getCardsByUserId(user.getUserId()).observe(this, cards -> {
             adapter.setCards(cards);
             setEmptyCardImage(cards);
         });
@@ -56,6 +59,24 @@ public class CardListActivity extends AppCompatActivity implements RemoveCardLis
             intent.putExtra(USER_ID_CODE ,user.getUserId());
             startActivityForResult(intent, NEW_CARD_REQUEST_CODE);
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_profil, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_logout:
+                finish();
+                return true;
+            case R.id.menu_profil:
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

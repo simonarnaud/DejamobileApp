@@ -19,9 +19,9 @@ public class CardRepository {
     private CardDao cardDao;
     private LiveData<List<Card>> cards;
 
-    public CardRepository(@NonNull Application application) {
+    public CardRepository(@NonNull Application application, int userId) {
         cardDao = AppDatabase.getAppDatabaseInstance(application).cardDao();
-        cards = cardDao.getAllCards();
+        cards = cardDao.loadAllCardsByUserId(userId);
     }
 
     public LiveData<List<Card>> getCards() {
@@ -54,9 +54,10 @@ public class CardRepository {
         return future.get();
     }
 
-    public List<Card> getCardsByUserId(int userId) throws ExecutionException, InterruptedException {
-        Callable<List<Card>> callable = () -> cardDao.loadAllCardsByUserId(userId);
+    public LiveData<List<Card>> getCardsByUserId(/*int userId*/)/* throws ExecutionException, InterruptedException */{
+        /*Callable<List<Card>> callable = () -> cardDao.loadAllCardsByUserId(userId);
         Future<List<Card>> future = AppDatabase.databaseWriteExecutor.submit(callable);
-        return future.get();
+        return future.get();*/
+        return cards;
     }
 }

@@ -56,11 +56,11 @@ public class NewCardActivity extends AppCompatActivity {
         button.setOnClickListener(view -> {
             Intent reply = new Intent();
             Date expiration = expirationDateValidation();
-            long numbers = numberCardValidation();
-            int cvv = cvvCardValidation();
+            String numbers = numberCardValidation();
+            String cvv = cvvCardValidation();
             CardScheme scheme = cardSchemeChecker();
 
-            if(expiration != null && numbers != -1 && cvv != -1) {
+            if(expiration != null && numbers != null && cvv != null) {
                 Card card = new Card(0, numbers, cvv, expiration, scheme, userId, false);
                 reply.putExtra(EXTRA_REPLY, card);
                 setResult(RESULT_OK, reply);
@@ -185,22 +185,22 @@ public class NewCardActivity extends AppCompatActivity {
         return null;
     }
 
-    private long numberCardValidation() {
+    private String numberCardValidation() {
         if(editCardNumber.getText().toString().length() == 19) {
             editCardNumber.setTextColor(getColor(R.color.blackTextColor));
-            return Long.parseLong(editCardNumber.getText().toString().replace(" ", ""));
+            return editCardNumber.getText().toString().replace(" ", "");
         }
         editCardNumber.setTextColor(getColor(R.color.error));
-        return -1;
+        return null;
     }
 
-    private int cvvCardValidation() {
+    private String cvvCardValidation() {
         if(editCardCvv.getText().toString().length() == 3) {
             editCardCvv.setTextColor(getColor(R.color.blackTextColor));
-            return Integer.parseInt(editCardCvv.getText().toString());
+            return editCardCvv.getText().toString();
         }
         editCardCvv.setTextColor(getColor(R.color.error));
-        return -1;
+        return null;
     }
 
     private CardScheme cardSchemeChecker() {

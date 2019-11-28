@@ -26,10 +26,10 @@ public class Card implements Serializable {
     private int cardId;
 
     @ColumnInfo(name = "numbers")
-    private long numbers;
+    private String numbers;
 
     @ColumnInfo(name = "crypto")
-    private int crypto;
+    private String crypto;
 
     @ColumnInfo(name = "expiration")
     @TypeConverters(DateConverter.class)
@@ -45,7 +45,7 @@ public class Card implements Serializable {
     @ColumnInfo(name = "sync")
     private boolean sync;
 
-    public Card(int cardId, long numbers, int crypto, @NonNull Date expiration, @NonNull CardScheme scheme, int userId, boolean sync) {
+    public Card(int cardId, String numbers, String crypto, @NonNull Date expiration, @NonNull CardScheme scheme, int userId, boolean sync) {
         this.cardId = cardId;
         this.numbers = numbers;
         this.crypto = crypto;
@@ -59,11 +59,11 @@ public class Card implements Serializable {
         return this.cardId;
     }
 
-    public long getNumbers() {
+    public String getNumbers() {
         return this.numbers;
     }
 
-    public int getCrypto() {
+    public String getCrypto() {
         return this.crypto;
     }
 
