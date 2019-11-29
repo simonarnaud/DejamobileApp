@@ -63,7 +63,7 @@ public class CardListFragment extends Fragment  implements RemoveCardListener {
     }
 
     private void setCardList(@NonNull View view) {
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerview);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerview_card);
         final CardListAdapter adapter = new CardListAdapter(getActivity(), user, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -112,6 +112,7 @@ public class CardListFragment extends Fragment  implements RemoveCardListener {
     public void makePurchase(Card card) {
         Intent intent = new Intent(getActivity(), MakePurchaseActivity.class);
         intent.putExtra(PrincipalActivity.CARD_SEND_CODE , card);
+        intent.putExtra(PrincipalActivity.USER_ID_CODE, user.getUserId());
         startActivityForResult(intent, PrincipalActivity.NEW_PURCHASE_REQUEST_CODE);
     }
 }

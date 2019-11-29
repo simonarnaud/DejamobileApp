@@ -46,7 +46,7 @@ public class Purchase {
         this.purchaseId = purchaseId;
         this.card = card;
         this.amount = amount;
-        this.description = (description != null && description.length() > 0) ? destination : "no description";
+        this.description = (description != null && description.length() > 0) ? description : "";
         this.destination = destination;
         this.date = new Date();
         this.sync = false;

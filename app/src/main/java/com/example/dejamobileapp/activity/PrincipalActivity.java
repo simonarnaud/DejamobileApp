@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import com.example.dejamobileapp.R;
 import com.example.dejamobileapp.fragment.CardListFragment;
 import com.example.dejamobileapp.fragment.ProfileFragment;
+import com.example.dejamobileapp.fragment.PurchaseListFragment;
 import com.example.dejamobileapp.model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -22,7 +23,6 @@ public class PrincipalActivity extends AppCompatActivity {
     public static final String USER_ID_CODE = "USER_ID_SEND";
 
     public static final String EXTRA_CARD_REPLY = "REPLY_NEW_CARD";
-    public static final String EXTRA_PURCHASE_REPLY = "REPLY_NEW_PURCHASE";
 
     public static final int NEW_CARD_REQUEST_CODE = 1;
     public static final int NEW_PURCHASE_REQUEST_CODE = 2;
@@ -71,8 +71,8 @@ public class PrincipalActivity extends AppCompatActivity {
 
     private void launchPurchasesFragment() {
         toolbar.setTitle(getResources().getString(R.string.menu_purchases));
-        //PurchaseFragment fragment = new PurchaseFragment();
-        //openFragment(fragment);
+        PurchaseListFragment fragment = new PurchaseListFragment();
+        openFragment(fragment, FRAGMENT_PURCHASE_TAG);
     }
 
     private void launchProfileFragment() {

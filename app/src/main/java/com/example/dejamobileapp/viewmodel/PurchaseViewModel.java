@@ -16,10 +16,10 @@ public class PurchaseViewModel extends AndroidViewModel {
     private PurchaseRepository purchaseRepository;
     private LiveData<List<Purchase>> purchases;
 
-    public PurchaseViewModel(@NonNull Application application) {
+    public PurchaseViewModel(@NonNull Application application, int userId) {
         super(application);
-        purchaseRepository = new PurchaseRepository(application);
-        purchases = purchaseRepository.getPurchases();
+        purchaseRepository = new PurchaseRepository(application, userId);
+        purchases = purchaseRepository.getPurchasesByUserId();
     }
 
     public LiveData<List<Purchase>> getPurchases() { return purchases; }
@@ -29,4 +29,5 @@ public class PurchaseViewModel extends AndroidViewModel {
     public void deleteAll() {purchaseRepository.deleteAll();}
     public Purchase getPurchaseById(int id) throws ExecutionException, InterruptedException {return purchaseRepository.getPurchaseById(id);}
     public List<Purchase> getPurchasesByCardId(int id) throws ExecutionException, InterruptedException {return purchaseRepository.getPurchasesByCardId(id);}
+    public LiveData<List<Purchase>> getPurchasesByUserId() { return purchases; }
 }

@@ -30,4 +30,5 @@
     <string name="purchase_description">Purchase description</string>
     <string name="purchase_validation">Waiting for transaction validation…</string>
     <string name="purchase_success">The purchase has been successfully completed</string>
+    <string name="purchase_amount_euros">%1$d €</string>
 </resources>

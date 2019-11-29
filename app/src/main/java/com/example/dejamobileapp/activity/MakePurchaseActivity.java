@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.dejamobileapp.R;
+import com.example.dejamobileapp.factory.PurchaseViewModelFactory;
 import com.example.dejamobileapp.model.Card;
 import com.example.dejamobileapp.model.Purchase;
 import com.example.dejamobileapp.viewmodel.PurchaseViewModel;
@@ -21,7 +22,7 @@ import androidx.lifecycle.ViewModelProviders;
 public class MakePurchaseActivity extends AppCompatActivity {
 
     private Card card;
-
+    private int userId;
     private EditText purchaseDescription;
     private ImageView nfcPurchase;
 
@@ -31,6 +32,7 @@ public class MakePurchaseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_make_purchase);
 
         card = (Card)getIntent().getSerializableExtra(PrincipalActivity.CARD_SEND_CODE);
+        userId = getIntent().getIntExtra(PrincipalActivity.USER_ID_CODE,-1);
 
         purchaseDescription = findViewById(R.id.purchase_description);
         nfcPurchase = findViewById(R.id.nfc_button);
@@ -46,7 +48,8 @@ public class MakePurchaseActivity extends AppCompatActivity {
 
         nfcPurchase.setOnClickListener(view -> {
             Purchase purchase = generatePurchase();
-            PurchaseViewModel purchaseViewModel = ViewModelProviders.of(this).get(PurchaseViewModel.class);
+            PurchaseViewModelFactory purchaseFactory = new PurchaseViewModelFactory(getApplication(), userId);
+            PurchaseViewModel purchaseViewModel = ViewModelProviders.of(this, purchaseFactory).get(PurchaseViewModel.class);
             purchaseViewModel.insert(purchase);
 
             simulatePaymentValidation();

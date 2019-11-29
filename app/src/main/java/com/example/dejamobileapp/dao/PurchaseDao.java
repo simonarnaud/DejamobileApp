@@ -36,4 +36,7 @@ public interface PurchaseDao {
 
     @Query("SELECT * FROM purchase WHERE card_id = :cardId")
     List<Purchase> loadAllPurchasesByCardId(int cardId);
+
+    @Query("SELECT * FROM purchase WHERE card_id IN (SELECT id FROM card WHERE user_id = :userId)")
+    LiveData<List<Purchase>> getPurchasesByUserId(int userId);
 }

@@ -19,9 +19,9 @@ public class PurchaseRepository {
     private PurchaseDao purchaseDao;
     private LiveData<List<Purchase>> purchases;
 
-    public PurchaseRepository(@NonNull Application application) {
+    public PurchaseRepository(@NonNull Application application, int userId) {
         purchaseDao = AppDatabase.getAppDatabaseInstance(application).purchaseDao();
-        purchases = purchaseDao.getAllPurchases();
+        purchases = purchaseDao.getPurchasesByUserId(userId);
     }
 
     public LiveData<List<Purchase>> getPurchases() {
@@ -54,5 +54,9 @@ public class PurchaseRepository {
         Callable<List<Purchase>> callable = () -> purchaseDao.loadAllPurchasesByCardId(id);
         Future<List<Purchase>> future = AppDatabase.databaseWriteExecutor.submit(callable);
         return future.get();
+    }
+
+    public LiveData<List<Purchase>> getPurchasesByUserId() {
+        return purchases;
     }
 }
