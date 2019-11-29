@@ -1,15 +1,17 @@
-package com.example.dejamobileapp;
+package com.example.dejamobileapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
+import android.util.Patterns;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.dejamobileapp.R;
 import com.example.dejamobileapp.converter.GenderConverter;
 import com.example.dejamobileapp.model.User;
 import com.example.dejamobileapp.utils.Gender;
@@ -78,10 +80,20 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private boolean allFieldAreCorrect() {
-        return !firstName.getText().toString().isEmpty() && !lastName.getText().toString().isEmpty() && !email.getText().toString().isEmpty() && checkPassword();
+        return !firstName.getText().toString().isEmpty()
+                && !lastName.getText().toString().isEmpty()
+                /*&& !email.getText().toString().isEmpty()*/
+                && checkPassword()
+                && isEmailValid(email.getText().toString());
     }
 
     private boolean checkPassword() {
-        return !password.getText().toString().isEmpty() && !confirmPassword.getText().toString().isEmpty() && confirmPassword.getText().toString().equals(password.getText().toString());
+        return !password.getText().toString().isEmpty()
+                && !confirmPassword.getText().toString().isEmpty()
+                && confirmPassword.getText().toString().equals(password.getText().toString());
+    }
+
+    private boolean isEmailValid(String email) {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 }

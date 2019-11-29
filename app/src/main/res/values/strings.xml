@@ -16,7 +16,14 @@
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
     <string name="email">Email</string>
+    <string name="email_points">Email :</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm password</string>
     <string name="sign_up">Sign up</string>
+    <string name="remove_account">Remove your account</string>
+    <string name="cards_owned">Virtual cards owned :</string>
+    <string name="cards_owned_end">%1$d cards owned</string>
+    <string name="delete_account_confirmation">Are you sure to delete your account ?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

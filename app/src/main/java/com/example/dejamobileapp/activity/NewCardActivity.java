@@ -1,4 +1,4 @@
-package com.example.dejamobileapp;
+package com.example.dejamobileapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.example.dejamobileapp.R;
 import com.example.dejamobileapp.fragment.CardListFragment;
 import com.example.dejamobileapp.model.Card;
 import com.example.dejamobileapp.utils.CardFormatter;

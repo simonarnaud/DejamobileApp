@@ -1,4 +1,4 @@
-package com.example.dejamobileapp;
+package com.example.dejamobileapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dejamobileapp.R;
 import com.example.dejamobileapp.model.User;
 import com.example.dejamobileapp.viewmodel.UserViewModel;
 
@@ -40,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
                 user = userViewModel.tryToLogOn(inputEmail.getText().toString(), inputPassword.getText().toString());
                 if (user != null) {
                     inputEmail.getText().clear();
+                    inputEmail.requestFocus();
                     inputPassword.getText().clear();
                     Intent intent = new Intent(this, PrincipalActivity.class);
                     intent.putExtra(USER_SEND_CODE, user);
