@@ -12,11 +12,11 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.example.dejamobileapp.CardListActivity;
 import com.example.dejamobileapp.R;
 import com.example.dejamobileapp.model.Card;
 import com.example.dejamobileapp.model.User;
 import com.example.dejamobileapp.utils.CardFormatter;
+import com.example.dejamobileapp.utils.RemoveCardListener;
 
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
@@ -45,10 +45,12 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
     private final LayoutInflater inflater;
     private List<Card> cards;
     private User user;
+    private RemoveCardListener listener;
 
-    public CardListAdapter(Context context, User user) {
+    public CardListAdapter(Context context, User user, RemoveCardListener listener) {
         inflater = LayoutInflater.from(context);
         this.user = user;
+        this.listener = listener;
     }
 
     @NotNull
@@ -94,14 +96,10 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
         menu.setOnMenuItemClickListener(menuItem -> {
             switch (menuItem.getItemId()) {
                 case R.id.remove_card_item_menu:
-                    if(inflater.getContext() instanceof CardListActivity) {
-                        ((CardListActivity) inflater.getContext()).removeCard(currentCard);
-                    }
+                    listener.removeCard(currentCard);
                     return true;
                 case R.id.remove_all_card_item_menu:
-                    if(inflater.getContext() instanceof CardListActivity) {
-                        ((CardListActivity) inflater.getContext()).removeAllCards();
-                    }
+                    listener.removeAllCards();
                 default:
                     return false;
             }

@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.example.dejamobileapp.fragment.CardListFragment;
 import com.example.dejamobileapp.model.Card;
 import com.example.dejamobileapp.utils.CardFormatter;
 import com.example.dejamobileapp.utils.CardScheme;
@@ -39,7 +40,7 @@ public class NewCardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_card);
 
-        userId = (int)getIntent().getSerializableExtra(CardListActivity.USER_ID_CODE);
+        userId = (int)getIntent().getSerializableExtra(CardListFragment.USER_ID_CODE);
 
         bindViewItems();
         cardClickGesture();

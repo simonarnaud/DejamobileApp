@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (user != null) {
                     inputEmail.getText().clear();
                     inputPassword.getText().clear();
-                    Intent intent = new Intent(this, CardListActivity.class);
+                    Intent intent = new Intent(this, PrincipalActivity.class);
                     intent.putExtra(USER_SEND_CODE, user);
                     startActivity(intent);
                 } else {
