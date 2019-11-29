@@ -92,9 +92,12 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
 
     private void popupMenuGenerate(@NotNull LinearLayout linear, Card currentCard) {
         PopupMenu menu = new PopupMenu(inflater.getContext(), linear);
-        menu.inflate(R.menu.menu_remove_card);
+        menu.inflate(R.menu.menu_card);
         menu.setOnMenuItemClickListener(menuItem -> {
             switch (menuItem.getItemId()) {
+                case R.id.make_purchase:
+                    listener.makePurchase(currentCard);
+                    return true;
                 case R.id.remove_card_item_menu:
                     listener.removeCard(currentCard);
                     return true;

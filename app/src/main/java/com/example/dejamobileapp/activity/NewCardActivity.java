@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.dejamobileapp.R;
-import com.example.dejamobileapp.fragment.CardListFragment;
 import com.example.dejamobileapp.model.Card;
 import com.example.dejamobileapp.utils.CardFormatter;
 import com.example.dejamobileapp.utils.CardScheme;
@@ -28,8 +27,6 @@ import java.util.Objects;
 
 public class NewCardActivity extends AppCompatActivity {
 
-    public static final String EXTRA_REPLY = "REPLY_NEW_CARD";
-
     private EditText editCardNumber, editCardExpiration, editCardCvv;
     private ImageView visa, mastercard, dci, jcb, maestro, cmi, cardScheme;
     private List<ImageView> cards;
@@ -41,7 +38,7 @@ public class NewCardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_card);
 
-        userId = (int)getIntent().getSerializableExtra(CardListFragment.USER_ID_CODE);
+        userId = (int)getIntent().getSerializableExtra(PrincipalActivity.USER_ID_CODE);
 
         bindViewItems();
         cardClickGesture();
@@ -56,7 +53,6 @@ public class NewCardActivity extends AppCompatActivity {
 
     private void saveCard() {
         button.setOnClickListener(view -> {
-            Intent reply = new Intent();
             Date expiration = expirationDateValidation();
             String numbers = numberCardValidation();
             String cvv = cvvCardValidation();
@@ -64,7 +60,8 @@ public class NewCardActivity extends AppCompatActivity {
 
             if(expiration != null && numbers != null && cvv != null) {
                 Card card = new Card(0, numbers, cvv, expiration, scheme, userId, false);
-                reply.putExtra(EXTRA_REPLY, card);
+                Intent reply = new Intent();
+                reply.putExtra(PrincipalActivity.EXTRA_CARD_REPLY, card);
                 setResult(RESULT_OK, reply);
                 finish();
             }

@@ -3,6 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/make_purchase"
+        android:title="@string/make_purchase"/>
+    <item
         android:id="@+id/remove_card_item_menu"
         android:title="@string/remove_card"
         android:icon="@android:drawable/ic_menu_delete"/>

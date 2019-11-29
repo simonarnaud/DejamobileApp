@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.dejamobileapp.activity.MakePurchaseActivity;
 import com.example.dejamobileapp.activity.PrincipalActivity;
 import com.example.dejamobileapp.activity.NewCardActivity;
 import com.example.dejamobileapp.R;
@@ -30,9 +31,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CardListFragment extends Fragment  implements RemoveCardListener {
-
-    private static final int NEW_CARD_REQUEST_CODE = 1;
-    public static final String USER_ID_CODE = "USER_ID_SEND";
 
     private ImageView emptyCards;
     private CardViewModel cardViewModel;
@@ -59,8 +57,8 @@ public class CardListFragment extends Fragment  implements RemoveCardListener {
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(viewButton -> {
             Intent intent = new Intent(getActivity(), NewCardActivity.class);
-            intent.putExtra(USER_ID_CODE ,user.getUserId());
-            startActivityForResult(intent, NEW_CARD_REQUEST_CODE);
+            intent.putExtra(PrincipalActivity.USER_ID_CODE ,user.getUserId());
+            startActivityForResult(intent, PrincipalActivity.NEW_CARD_REQUEST_CODE);
         });
     }
 
@@ -82,9 +80,11 @@ public class CardListFragment extends Fragment  implements RemoveCardListener {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == NEW_CARD_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            Card card = (Card)data.getSerializableExtra(NewCardActivity.EXTRA_REPLY);
+        if (requestCode == PrincipalActivity.NEW_CARD_REQUEST_CODE && resultCode == Activity.RESULT_OK ) {
+            Card card = (Card)data.getSerializableExtra(PrincipalActivity.EXTRA_CARD_REPLY);
             cardViewModel.insert(card);
+        } else if(requestCode == PrincipalActivity.NEW_PURCHASE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            Toast.makeText(activity.getApplicationContext(), getResources().getString(R.string.purchase_success), Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(activity.getApplicationContext(), R.string.empty_not_saved, Toast.LENGTH_SHORT).show();
         }
@@ -106,5 +106,12 @@ public class CardListFragment extends Fragment  implements RemoveCardListener {
     @Override
     public void removeAllCards() {
         cardViewModel.deleteAllUserCards(user.getUserId());
+    }
+
+    @Override
+    public void makePurchase(Card card) {
+        Intent intent = new Intent(getActivity(), MakePurchaseActivity.class);
+        intent.putExtra(PrincipalActivity.CARD_SEND_CODE , card);
+        startActivityForResult(intent, PrincipalActivity.NEW_PURCHASE_REQUEST_CODE);
     }
 }
