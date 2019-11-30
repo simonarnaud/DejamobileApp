@@ -14,22 +14,13 @@ import com.example.dejamobileapp.fragment.CardListFragment;
 import com.example.dejamobileapp.fragment.ProfileFragment;
 import com.example.dejamobileapp.fragment.PurchaseListFragment;
 import com.example.dejamobileapp.model.User;
+import com.example.dejamobileapp.utils.Codes;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+/**
+ * Class in charge of presenting the heart of the application
+ */
 public class PrincipalActivity extends AppCompatActivity {
-
-    public static final String USER_CODE = "USER_SEND";
-    public static final String CARD_SEND_CODE = "CARD_SEND";
-    public static final String USER_ID_CODE = "USER_ID_SEND";
-
-    public static final String EXTRA_CARD_REPLY = "REPLY_NEW_CARD";
-
-    public static final int NEW_CARD_REQUEST_CODE = 1;
-    public static final int NEW_PURCHASE_REQUEST_CODE = 2;
-
-    public static final String FRAGMENT_PROFILE_TAG = "FRAGMENT_PROFILE";
-    public static final String FRAGMENT_CARDS_TAG = "FRAGMENT_CARDS";
-    public static final String FRAGMENT_PURCHASE_TAG = "FRAGMENT_PURCHASE";
 
     private ActionBar toolbar;
     private User user;
@@ -39,7 +30,7 @@ public class PrincipalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
-        user = (User)getIntent().getSerializableExtra(LoginActivity.USER_SEND_CODE);
+        user = (User)getIntent().getSerializableExtra(Codes.USER_SEND_CODE);
 
         toolbar = getSupportActionBar();
         BottomNavigationView bottomNavigation = findViewById(R.id.navigation_bar);
@@ -63,27 +54,41 @@ public class PrincipalActivity extends AppCompatActivity {
         return false;
     };
 
+    /**
+     * Method which launch the cards fragment
+     */
     private void launchCardsFragment() {
         toolbar.setTitle(getResources().getString(R.string.menu_cards));
         CardListFragment fragment = new CardListFragment();
-        openFragment(fragment, FRAGMENT_CARDS_TAG);
+        openFragment(fragment, Codes.FRAGMENT_CARDS_TAG);
     }
 
+    /**
+     * Method wich launch the purchases fragment
+     */
     private void launchPurchasesFragment() {
         toolbar.setTitle(getResources().getString(R.string.menu_purchases));
         PurchaseListFragment fragment = new PurchaseListFragment();
-        openFragment(fragment, FRAGMENT_PURCHASE_TAG);
+        openFragment(fragment, Codes.FRAGMENT_PURCHASE_TAG);
     }
 
+    /**
+     * Method which launch the profile fragment
+     */
     private void launchProfileFragment() {
         toolbar.setTitle(getResources().getString(R.string.menu_profile));
         ProfileFragment fragment = new ProfileFragment();
-        openFragment(fragment, FRAGMENT_PROFILE_TAG);
+        openFragment(fragment, Codes.FRAGMENT_PROFILE_TAG);
     }
 
+    /**
+     * Method which open the fragment passed in parameters
+     * @param fragment the fragment to display
+     * @param tag the tag name of the fragment
+     */
     private void openFragment(Fragment fragment, String tag) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(USER_CODE, user);
+        bundle.putSerializable(Codes.USER_CODE, user);
         fragment.setArguments(bundle);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, fragment, tag);

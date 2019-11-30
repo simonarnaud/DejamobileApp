@@ -16,10 +16,15 @@ import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ * Class in charge of adapt purchase items
+ */
 public class PurchaseListAdapter extends RecyclerView.Adapter<PurchaseListAdapter.PurchaseViewHolder> {
 
+    /**
+     * Class in charge of bin purchase items
+     */
     class PurchaseViewHolder extends RecyclerView.ViewHolder {
-
         private final TextView purchaseDate, purchaseDestination, purchaseAmount, purchaseDescription;
 
         private PurchaseViewHolder(View itemView) {
@@ -64,6 +69,10 @@ public class PurchaseListAdapter extends RecyclerView.Adapter<PurchaseListAdapte
         }
     }
 
+    /**
+     * Methoc which set the purchase list
+     * @param purchases the list of purchases to set
+     */
     public void setPurchases(List<Purchase> purchases) {
         this.purchases = purchases;
         notifyDataSetChanged();

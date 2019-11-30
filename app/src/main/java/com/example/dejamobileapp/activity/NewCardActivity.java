@@ -1,5 +1,6 @@
 package com.example.dejamobileapp.activity;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -18,6 +19,7 @@ import com.example.dejamobileapp.R;
 import com.example.dejamobileapp.model.Card;
 import com.example.dejamobileapp.utils.CardFormatter;
 import com.example.dejamobileapp.utils.CardScheme;
+import com.example.dejamobileapp.utils.Codes;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,6 +27,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Method in charge of add a new card
+ */
 public class NewCardActivity extends AppCompatActivity {
 
     private EditText editCardNumber, editCardExpiration, editCardCvv;
@@ -38,7 +43,7 @@ public class NewCardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_card);
 
-        userId = (int)getIntent().getSerializableExtra(PrincipalActivity.USER_ID_CODE);
+        userId = (int)getIntent().getSerializableExtra(Codes.USER_ID_CODE);
 
         bindViewItems();
         cardClickGesture();
@@ -48,9 +53,17 @@ public class NewCardActivity extends AppCompatActivity {
         cardListener(editCardExpiration, '/', 3, 3);
         cardListener(editCardNumber, ' ', 5, 4);
 
+        ActionBar toolbar = getSupportActionBar();
+        if (toolbar != null) {
+            toolbar.setTitle(getResources().getString(R.string.card_title));
+        }
+
         saveCard();
     }
 
+    /**
+     * Method which save the card enter by the user
+     */
     private void saveCard() {
         button.setOnClickListener(view -> {
             Date expiration = expirationDateValidation();
@@ -61,13 +74,16 @@ public class NewCardActivity extends AppCompatActivity {
             if(expiration != null && numbers != null && cvv != null) {
                 Card card = new Card(0, numbers, cvv, expiration, scheme, userId, false);
                 Intent reply = new Intent();
-                reply.putExtra(PrincipalActivity.EXTRA_CARD_REPLY, card);
+                reply.putExtra(Codes.EXTRA_CARD_REPLY, card);
                 setResult(RESULT_OK, reply);
                 finish();
             }
         });
     }
 
+    /**
+     * Method which set the card number text with space between four numbers
+     */
     private void cardNumberFilters() {
         InputFilter filter = (charSequence, start, end, spanned, i2, i3) -> {
             for (int i = start; i < end; i++) {
@@ -80,6 +96,9 @@ public class NewCardActivity extends AppCompatActivity {
         editCardNumber.setFilters(new InputFilter[] {filter, new InputFilter.LengthFilter(19)});
     }
 
+    /**
+     * Method which set the expiration date with a slash between the mont and the year
+     */
     private void expirationDateFilters() {
         InputFilter filter = (charSequence, start, end, spanned, i2, i3) -> {
             for (int i = start; i < end; i++) {
@@ -98,6 +117,13 @@ public class NewCardActivity extends AppCompatActivity {
         editCardExpiration.setFilters(new InputFilter[] {filter, new InputFilter.LengthFilter(5)});
     }
 
+    /**
+     * Method which listen the changes of edittext and format text
+     * @param editCardExpiration the edittext which contain expiration of the card
+     * @param character the character added
+     * @param divider the divider number
+     * @param blocks the number of blocks you want
+     */
     private void cardListener(EditText editCardExpiration, char character, int divider, int blocks) {
         editCardExpiration.addTextChangedListener(new TextWatcher() {
             @Override
@@ -109,6 +135,9 @@ public class NewCardActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Method which update the imageView when a card scheme is clicked
+     */
     private void cardClickGesture() {
         visa.setOnClickListener(view -> alphaCardGesture(visa));
         mastercard.setOnClickListener(view -> alphaCardGesture(mastercard));
@@ -118,6 +147,9 @@ public class NewCardActivity extends AppCompatActivity {
         cmi.setOnClickListener(view -> alphaCardGesture(cmi));
     }
 
+    /**
+     * Method which bind item views into the variables
+      */
     private void bindViewItems() {
         visa = findViewById(R.id.bt_visa);
         mastercard = findViewById(R.id.bt_mastercard);
@@ -149,6 +181,10 @@ public class NewCardActivity extends AppCompatActivity {
         cards.add(cmi);
     }
 
+    /**
+     * Method which change alpha for each card scheme
+     * @param imageClicked the card scheme clicked
+     */
     private void alphaCardGesture(ImageView imageClicked) {
         for(ImageView image : cards) {
             if(image.equals(imageClicked)) {
@@ -160,6 +196,10 @@ public class NewCardActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method which check if the expiration date is already valid
+     * @return good date format of text inserted by the user
+     */
     private Date expirationDateValidation() {
         if(editCardExpiration.getText().toString().length() == 5) {
 
@@ -184,6 +224,10 @@ public class NewCardActivity extends AppCompatActivity {
         return null;
     }
 
+    /**
+     * Method which check if the length of card number is good
+     * @return the card number without space
+     */
     private String numberCardValidation() {
         if(editCardNumber.getText().toString().length() == 19) {
             editCardNumber.setTextColor(getColor(R.color.blackTextColor));
@@ -193,6 +237,10 @@ public class NewCardActivity extends AppCompatActivity {
         return null;
     }
 
+    /**
+     * Method which check if the length of card cvv is good
+     * @return the card cvv
+     */
     private String cvvCardValidation() {
         if(editCardCvv.getText().toString().length() == 3) {
             editCardCvv.setTextColor(getColor(R.color.blackTextColor));
@@ -202,6 +250,10 @@ public class NewCardActivity extends AppCompatActivity {
         return null;
     }
 
+    /**
+     * Method which check and return the card scheme choose by the user
+     * @return the card scheme choose by the user
+     */
     private CardScheme cardSchemeChecker() {
         final Bitmap actualCardImage = ((BitmapDrawable)cardScheme.getDrawable()).getBitmap();
 

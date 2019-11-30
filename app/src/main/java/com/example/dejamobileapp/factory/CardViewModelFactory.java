@@ -8,6 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+/**
+ * Class in charge of create a ViewModelProvider for card
+ */
 public class CardViewModelFactory implements ViewModelProvider.Factory {
 
     private Application application;

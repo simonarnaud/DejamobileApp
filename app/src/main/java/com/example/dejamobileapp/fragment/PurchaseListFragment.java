@@ -8,11 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.dejamobileapp.R;
-import com.example.dejamobileapp.activity.PrincipalActivity;
 import com.example.dejamobileapp.adapter.PurchaseListAdapter;
 import com.example.dejamobileapp.factory.PurchaseViewModelFactory;
 import com.example.dejamobileapp.model.Purchase;
 import com.example.dejamobileapp.model.User;
+import com.example.dejamobileapp.utils.Codes;
 import com.example.dejamobileapp.viewmodel.PurchaseViewModel;
 
 import java.util.List;
@@ -24,6 +24,9 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ * Class in charge of control the purchase list fragment
+ */
 public class PurchaseListFragment extends Fragment {
 
     private ImageView emptyPurchases;
@@ -34,7 +37,7 @@ public class PurchaseListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         assert getArguments() != null;
-        user = (User) getArguments().getSerializable(PrincipalActivity.USER_CODE);
+        user = (User) getArguments().getSerializable(Codes.USER_CODE);
         return inflater.inflate(R.layout.fragment_purchase_list, container, false);
     }
 
@@ -48,6 +51,10 @@ public class PurchaseListFragment extends Fragment {
         setPurchaseList(view);
     }
 
+    /**
+     * Method which set the purchase list
+     * @param view the actual view
+     */
     private void setPurchaseList(@NonNull View view) {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview_purchase);
         final PurchaseListAdapter adapter = new PurchaseListAdapter(getActivity());
@@ -63,6 +70,10 @@ public class PurchaseListFragment extends Fragment {
         });
     }
 
+    /**
+     * Method which set the visibility of the image in case of list of purchases is empty
+     * @param purchases the list of purchases
+     */
     private void setEmptyPurchasesImage(List<Purchase> purchases) {
         if(purchases.size() > 0) {
             emptyPurchases.setVisibility(View.GONE);

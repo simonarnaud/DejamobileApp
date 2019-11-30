@@ -13,9 +13,11 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.example.dejamobileapp.R;
+import com.example.dejamobileapp.converter.GenderConverter;
 import com.example.dejamobileapp.model.Card;
 import com.example.dejamobileapp.model.User;
 import com.example.dejamobileapp.utils.CardFormatter;
+import com.example.dejamobileapp.utils.Gender;
 import com.example.dejamobileapp.utils.RemoveCardListener;
 
 import org.jetbrains.annotations.NotNull;
@@ -23,8 +25,14 @@ import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ * Class in charge of adapt card items
+ */
 public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardViewHolder> {
 
+    /**
+     * Class in charge of bin card items
+     */
     class CardViewHolder extends RecyclerView.ViewHolder {
         private final TextView cardNumbers, cardDate, cardName, cardCrypto;
         private final ImageView cardScheme;
@@ -67,7 +75,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
 
             holder.cardNumbers.setText(CardFormatter.cardNumberFormatter(currentCard.getNumbers()));
             holder.cardDate.setText(formatExpirationDate(currentCard));
-            holder.cardName.setText(user.getCardIdentity());
+            holder.cardName.setText(GenderConverter.getGenderTitle(user.getGender(), inflater.getContext()).concat(user.getCardIdentity()));
             holder.cardCrypto.setText(String.valueOf(currentCard.getCrypto()));
             holder.cardScheme.setImageDrawable(setSchemeImage(currentCard));
 
@@ -90,6 +98,11 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
         }
     }
 
+    /**
+     * Method which display the popup menu for interact with a card
+     * @param linear the linearLayout corresponding to the card item
+     * @param currentCard the current card into the item
+     */
     private void popupMenuGenerate(@NotNull LinearLayout linear, Card currentCard) {
         PopupMenu menu = new PopupMenu(inflater.getContext(), linear);
         menu.inflate(R.menu.menu_card);
@@ -111,6 +124,10 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
         menu.show();
     }
 
+    /**
+     * Method which set the card list
+     * @param cards the list of cards to set
+     */
     public void setCards(List<Card> cards) {
         this.cards = cards;
         notifyDataSetChanged();
@@ -124,6 +141,11 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
         return 0;
     }
 
+    /**
+     * Method which set imageview with the right card scheme
+     * @param card the card to display
+     * @return the drawable corresponding to the card scheme
+     */
     private Drawable setSchemeImage(Card card) {
         switch (card.getScheme()) {
             case VISA:
@@ -141,6 +163,10 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
         }
     }
 
+    /**
+     * Method which is in charge of switch with the card face
+     * @param holder the holder of the view
+     */
     private void switchView(CardViewHolder holder) {
         if (holder.cardLinear.getVisibility() == View.VISIBLE) {
             holder.cardLinear.setVisibility(View.GONE);
@@ -151,6 +177,11 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
         }
     }
 
+    /**
+     * Method which format the expiration date
+     * @param card the actual card
+     * @return the expiration date
+     */
     private String formatExpirationDate(Card card) {
         String chain = (String) DateFormat.format("MM", card.getExpiration());
         chain += "/";

@@ -11,6 +11,9 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
+/**
+ * Class representing the user model
+ */
 @Entity(tableName = "user")
 public class User implements Serializable {
     @PrimaryKey (autoGenerate = true)
@@ -43,7 +46,7 @@ public class User implements Serializable {
         this.email = email;
         this.gender = gender;
         this.password = password;
-        this.sync = false;
+        this.sync = sync;
     }
 
     public int getUserId() {
@@ -75,14 +78,7 @@ public class User implements Serializable {
     }
 
     public String getCardIdentity() {
-        String str = "";
-        if(this.gender == Gender.MALE) {
-            str += "Mr ";
-        } else if (this.gender == Gender.FEMALE) {
-            str += "Mme ";
-        }
-
-        str += (this.firstName.substring(0,1).toUpperCase() + this.firstName.substring(1));
+        String str = (this.firstName.substring(0,1).toUpperCase() + this.firstName.substring(1));
         str += " ";
         str += this.lastName.toUpperCase();
 

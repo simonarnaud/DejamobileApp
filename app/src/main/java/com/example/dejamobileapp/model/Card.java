@@ -14,6 +14,9 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
+/**
+ * Class representing the card model
+ */
 @Entity(foreignKeys = @ForeignKey(entity = User.class,
             parentColumns = "id",
             childColumns = "user_id",
@@ -52,7 +55,7 @@ public class Card implements Serializable {
         this.expiration = expiration;
         this.scheme = scheme;
         this.userId = userId;
-        this.sync = false;
+        this.sync = sync;
     }
 
     public int getCardId() {

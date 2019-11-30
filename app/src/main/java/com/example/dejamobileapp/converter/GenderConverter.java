@@ -1,9 +1,15 @@
 package com.example.dejamobileapp.converter;
 
+import android.content.Context;
+
+import com.example.dejamobileapp.R;
 import com.example.dejamobileapp.utils.Gender;
 
 import androidx.room.TypeConverter;
 
+/**
+ * Class in charge of convert Gender
+ */
 public class GenderConverter {
 
     @TypeConverter
@@ -30,12 +36,17 @@ public class GenderConverter {
         }
     }
 
-    public static Gender toGender(String gender) {
-        if(gender.toLowerCase().equals("male")) {
-            return Gender.MALE;
-        } else if(gender.toLowerCase().equals("female")) {
-            return Gender.FEMALE;
+    /**
+     * Method which return the title in function of gender
+     * @param gender the user gender
+     * @return the title associated
+     */
+    public static String getGenderTitle(Gender gender, Context context) {
+        if(gender == Gender.MALE) {
+            return context.getResources().getString(R.string.male_title).concat(" ");
+        } else if(gender == Gender.FEMALE) {
+            return context.getResources().getString(R.string.female_title).concat(" ");
         }
-        return Gender.OTHER;
+        return "";
     }
 }

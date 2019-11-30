@@ -19,6 +19,9 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+/**
+ * Class in charge of create the room database and give back a unique instance of it
+ */
 @Database(entities = {User.class, Card.class, Purchase.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -43,7 +46,9 @@ public abstract class AppDatabase extends RoomDatabase {
     }
 
 
-    //Database Populator
+    /**
+     * AppDatabase Generator
+     */
     private static RoomDatabase.Callback roomDatabaseCallback = new RoomDatabase.Callback() {
         @Override
         public void onOpen(@NonNull SupportSQLiteDatabase db) {

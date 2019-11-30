@@ -4,6 +4,9 @@ import com.example.dejamobileapp.utils.CardScheme;
 
 import androidx.room.TypeConverter;
 
+/**
+ * Class in charge of convert CardScheme
+ */
 public class CardSchemeConverter {
 
     @TypeConverter

@@ -12,16 +12,20 @@ import android.widget.Toast;
 
 import com.example.dejamobileapp.R;
 import com.example.dejamobileapp.model.User;
+import com.example.dejamobileapp.utils.Codes;
 import com.example.dejamobileapp.viewmodel.UserViewModel;
 
 import java.util.concurrent.ExecutionException;
 
+
+/**
+ * Class in charge of Login presentation
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private EditText inputEmail, inputPassword;
 
     private UserViewModel userViewModel;
-    public static final String USER_SEND_CODE = "THROW_USER";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +48,10 @@ public class LoginActivity extends AppCompatActivity {
                     inputEmail.requestFocus();
                     inputPassword.getText().clear();
                     Intent intent = new Intent(this, PrincipalActivity.class);
-                    intent.putExtra(USER_SEND_CODE, user);
+                    intent.putExtra(Codes.USER_SEND_CODE, user);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(this, "Login error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getResources().getString(R.string.login_error), Toast.LENGTH_SHORT).show();
                 }
 
             } catch (ExecutionException | InterruptedException e) {

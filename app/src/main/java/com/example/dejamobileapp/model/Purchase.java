@@ -11,13 +11,15 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
+/**
+ * Class representing the purchase model
+ */
 @Entity(foreignKeys = @ForeignKey(entity = User.class,
         parentColumns = "id",
         childColumns = "card_id",
         onDelete = ForeignKey.CASCADE
 ),
         tableName = "purchase")
-
 public class Purchase {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
@@ -48,8 +50,8 @@ public class Purchase {
         this.amount = amount;
         this.description = (description != null && description.length() > 0) ? description : "";
         this.destination = destination;
-        this.date = new Date();
-        this.sync = false;
+        this.date = date;
+        this.sync = sync;
     }
 
     public int getPurchaseId() {

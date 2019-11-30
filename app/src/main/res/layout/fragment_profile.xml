@@ -85,8 +85,9 @@
                 android:id="@+id/user_cards_owned"
                 android:textSize="18sp"
                 android:textAlignment="center"
-                app:layout_constraintStart_toEndOf="@id/text_cards_owned"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/text_cards_owned"
                 app:layout_constraintTop_toTopOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

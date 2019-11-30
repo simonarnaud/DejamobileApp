@@ -10,13 +10,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.dejamobileapp.activity.MakePurchaseActivity;
-import com.example.dejamobileapp.activity.PrincipalActivity;
 import com.example.dejamobileapp.activity.NewCardActivity;
 import com.example.dejamobileapp.R;
 import com.example.dejamobileapp.adapter.CardListAdapter;
 import com.example.dejamobileapp.factory.CardViewModelFactory;
 import com.example.dejamobileapp.model.Card;
 import com.example.dejamobileapp.model.User;
+import com.example.dejamobileapp.utils.Codes;
 import com.example.dejamobileapp.utils.RemoveCardListener;
 import com.example.dejamobileapp.viewmodel.CardViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -30,6 +30,9 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ * Class in charge of control the card list fragment
+ */
 public class CardListFragment extends Fragment  implements RemoveCardListener {
 
     private ImageView emptyCards;
@@ -41,7 +44,7 @@ public class CardListFragment extends Fragment  implements RemoveCardListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         assert getArguments() != null;
-        user = (User) getArguments().getSerializable(PrincipalActivity.USER_CODE);
+        user = (User) getArguments().getSerializable(Codes.USER_CODE);
         return inflater.inflate(R.layout.fragment_card_list, container, false);
     }
 
@@ -57,11 +60,15 @@ public class CardListFragment extends Fragment  implements RemoveCardListener {
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(viewButton -> {
             Intent intent = new Intent(getActivity(), NewCardActivity.class);
-            intent.putExtra(PrincipalActivity.USER_ID_CODE ,user.getUserId());
-            startActivityForResult(intent, PrincipalActivity.NEW_CARD_REQUEST_CODE);
+            intent.putExtra(Codes.USER_ID_CODE ,user.getUserId());
+            startActivityForResult(intent, Codes.NEW_CARD_REQUEST_CODE);
         });
     }
 
+    /**
+     * Method which set the card list
+     * @param view the actual view
+     */
     private void setCardList(@NonNull View view) {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview_card);
         final CardListAdapter adapter = new CardListAdapter(getActivity(), user, this);
@@ -77,19 +84,29 @@ public class CardListFragment extends Fragment  implements RemoveCardListener {
         });
     }
 
+    /**
+     * Method which get back a response to the activity how launch this fragment
+     * @param requestCode the code request
+     * @param resultCode the code result
+     * @param data the data to share
+     */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == PrincipalActivity.NEW_CARD_REQUEST_CODE && resultCode == Activity.RESULT_OK ) {
-            Card card = (Card)data.getSerializableExtra(PrincipalActivity.EXTRA_CARD_REPLY);
+        if (requestCode == Codes.NEW_CARD_REQUEST_CODE && resultCode == Activity.RESULT_OK ) {
+            Card card = (Card)data.getSerializableExtra(Codes.EXTRA_CARD_REPLY);
             cardViewModel.insert(card);
-        } else if(requestCode == PrincipalActivity.NEW_PURCHASE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+        } else if(requestCode == Codes.NEW_PURCHASE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             Toast.makeText(activity.getApplicationContext(), getResources().getString(R.string.purchase_success), Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(activity.getApplicationContext(), R.string.empty_not_saved, Toast.LENGTH_SHORT).show();
         }
     }
 
+    /**
+     * Method which set the visibility of the image in case of list of cards is empty
+     * @param cards the list of cards
+     */
     private void setEmptyCardImage(List<Card> cards) {
         if(cards.size() > 0) {
             emptyCards.setVisibility(View.GONE);
@@ -111,8 +128,8 @@ public class CardListFragment extends Fragment  implements RemoveCardListener {
     @Override
     public void makePurchase(Card card) {
         Intent intent = new Intent(getActivity(), MakePurchaseActivity.class);
-        intent.putExtra(PrincipalActivity.CARD_SEND_CODE , card);
-        intent.putExtra(PrincipalActivity.USER_ID_CODE, user.getUserId());
-        startActivityForResult(intent, PrincipalActivity.NEW_PURCHASE_REQUEST_CODE);
+        intent.putExtra(Codes.CARD_SEND_CODE , card);
+        intent.putExtra(Codes.USER_ID_CODE, user.getUserId());
+        startActivityForResult(intent, Codes.NEW_PURCHASE_REQUEST_CODE);
     }
 }

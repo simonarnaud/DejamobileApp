@@ -13,6 +13,9 @@ import androidx.room.Update;
 
 import static androidx.room.OnConflictStrategy.REPLACE;
 
+/**
+ * Class in charge of regroup user methods to interact with room database
+ */
 @Dao
 public interface UserDao {
 

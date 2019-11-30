@@ -21,7 +21,7 @@
     <string name="confirm_password">Confirm password</string>
     <string name="sign_up">Sign up</string>
     <string name="remove_account">Remove your account</string>
-    <string name="cards_owned">Virtual cards owned :</string>
+    <string name="cards_owned">Cards owned :</string>
     <string name="cards_owned_end">%1$d cards owned</string>
     <string name="delete_account_confirmation">Are you sure to delete your account ?</string>
     <string name="yes">Yes</string>
@@ -31,4 +31,13 @@
     <string name="purchase_validation">Waiting for transaction validation…</string>
     <string name="purchase_success">The purchase has been successfully completed</string>
     <string name="purchase_amount_euros">%1$d €</string>
+    <string name="login">Login</string>
+    <string name="login_error">Login error</string>
+    <string name="purchase_title">Make a purchase</string>
+    <string name="card_title">Add new card</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="other">Other</string>
+    <string name="male_title">Ms</string>
+    <string name="female_title">Mrs</string>
 </resources>
